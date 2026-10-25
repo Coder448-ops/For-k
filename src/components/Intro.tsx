@@ -54,7 +54,7 @@ export default function Intro({ onDiscover, leaving, reducedMotion }: IntroProps
       ]
         .filter(Boolean)
         .join(' ')}
-      aria-label="Introduction"
+      aria-label="Kirish"
     >
       <div className="intro__bg" aria-hidden="true">
         <div className="intro__halo" />
@@ -69,10 +69,10 @@ export default function Intro({ onDiscover, leaving, reducedMotion }: IntroProps
 
         <p className="intro__tagline">
           <span className="intro__line">
-            <span className="intro__line-inner">Not everything</span>
+            <span className="intro__line-inner">Hamma narsani ham</span>
           </span>
           <span className="intro__line">
-            <span className="intro__line-inner">needs an explanation.</span>
+            <span className="intro__line-inner">tushuntirish shart emas.</span>
           </span>
         </p>
 
@@ -84,7 +84,7 @@ export default function Intro({ onDiscover, leaving, reducedMotion }: IntroProps
           tabIndex={ctaLive ? 0 : -1}
         >
           <span className="glass-btn__sheen" aria-hidden="true" />
-          <span className="glass-btn__label">Discover</span>
+          <span className="glass-btn__label">Kashf etish</span>
         </button>
       </div>
 
@@ -94,7 +94,7 @@ export default function Intro({ onDiscover, leaving, reducedMotion }: IntroProps
         onClick={onDiscover}
         tabIndex={skipLive ? 0 : -1}
       >
-        Skip intro
+        O’tkazib yuborish
         <span className="intro__skip-line" aria-hidden="true" />
       </button>
     </section>

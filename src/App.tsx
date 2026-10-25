@@ -109,7 +109,7 @@ export default function App() {
 
       {phase === 'main' && (
         <a className="skip-link" href="#hero">
-          Skip to content
+          Asosiy qismga o’tish
         </a>
       )}
       {phase === 'main' && <ScrollProgress />}

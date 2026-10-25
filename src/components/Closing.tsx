@@ -55,7 +55,7 @@ export default function Closing({ onReplay, reducedMotion }: ClosingProps) {
       <div className="closing__fade" aria-hidden="true" />
 
       <div className="shell closing__layout">
-        <p className="eyebrow reveal" data-reveal>03 — Finale</p>
+        <p className="eyebrow reveal" data-reveal>03 — Yakun</p>
 
         <h2
           className="closing__title reveal"
@@ -63,7 +63,7 @@ export default function Closing({ onReplay, reducedMotion }: ClosingProps) {
           id="closing-title"
           style={{ '--reveal-delay': '100ms' } as CSSProperties}
         >
-          Some surprises are better <em>discovered</em> than explained.
+          Ba’zi syurprizlarni izohlashdan ko’ra <em>kashf etish</em> yaxshiroq.
         </h2>
 
         <p
@@ -71,7 +71,7 @@ export default function Closing({ onReplay, reducedMotion }: ClosingProps) {
           data-reveal
           style={{ '--reveal-delay': '220ms' } as CSSProperties}
         >
-          Hope this little experience made you smile.
+          Umid qilamanki, bu kichik tajriba yuzingga tabassum olib keldi.
         </p>
 
         <div
@@ -89,7 +89,7 @@ export default function Closing({ onReplay, reducedMotion }: ClosingProps) {
         <div className="closing__controls reveal" data-reveal>
           <button type="button" className="ghost-btn" onClick={onReplay}>
             <RotateCcw size={15} strokeWidth={1.5} aria-hidden="true" />
-            <span>Replay the opening</span>
+            <span>Boshlanishni qayta ko’rish</span>
           </button>
 
           <button
@@ -98,12 +98,12 @@ export default function Closing({ onReplay, reducedMotion }: ClosingProps) {
             onClick={() => scrollToTop(reducedMotion)}
           >
             <ArrowUp size={15} strokeWidth={1.5} aria-hidden="true" />
-            <span>Back to top</span>
+            <span>Yuqoriga</span>
           </button>
         </div>
 
         <p className="closing__note reveal" data-reveal>
-          KUMUSH — a silver experience · No tracking, no data. Just silver.
+          KUMUSH — kumush tajriba · Kuzatuvsiz, ma’lumotsiz. Faqat kumush.
         </p>
       </div>
     </footer>

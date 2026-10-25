@@ -212,20 +212,20 @@ export default function Gallery({ reducedMotion, finePointer }: GalleryProps) {
   const cards = [
     {
       index: 'I',
-      title: 'Perspective',
-      message: 'Sometimes, a different view changes everything.',
+      title: 'Nuqtayi nazar',
+      message: 'Ba’zan boshqacha nuqtayi nazar hammasini o’zgartiradi.',
       visual: <MetallicSphere />,
     },
     {
       index: 'II',
-      title: 'Possibility',
-      message: 'There is always something new to discover.',
+      title: 'Imkoniyat',
+      message: 'Har doim kashf etadigan yangi narsa bor.',
       visual: <GlassPrism />,
     },
     {
       index: 'III',
-      title: 'A Little Wonder',
-      message: 'Small details can make an experience memorable.',
+      title: 'Kichik mo’jiza',
+      message: 'Kichik tafsilotlar tajribani unutilmas qilishi mumkin.',
       visual: <Constellation />,
     },
   ]
@@ -236,13 +236,13 @@ export default function Gallery({ reducedMotion, finePointer }: GalleryProps) {
 
       <div className="shell">
         <header className="gallery__header">
-          <p className="eyebrow reveal" data-reveal>02 — The Gallery</p>
+          <p className="eyebrow reveal" data-reveal>02 — Galereya</p>
           <h2 className="reveal" data-reveal id="gallery-title" style={{ '--reveal-delay': '80ms' } as CSSProperties}>
-            Three small studies in silver.
+            Kumushdan uch kichik etyud.
           </h2>
           <p className="lede reveal" data-reveal style={{ '--reveal-delay': '160ms' } as CSSProperties}>
-            Each study keeps one quiet sentence. Open them at your own pace —
-            they will wait.
+            Har bir etyudda bitta jim jumla yashiringan. Shoshilmasdan och —
+            ular kutadi.
           </p>
         </header>
 

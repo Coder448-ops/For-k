@@ -78,13 +78,13 @@ export default function GiftObject({ reducedMotion, finePointer }: GiftObjectPro
 
       <div className="shell object__layout">
         <header className="object__header">
-          <p className="eyebrow reveal" data-reveal>01 — The Object</p>
+          <p className="eyebrow reveal" data-reveal>01 — Obyekt</p>
           <h2 className="reveal" data-reveal id="object-title" style={{ '--reveal-delay': '80ms' } as CSSProperties}>
-            Something waits quietly inside.
+            Ichida nimadir jim kutmoqda.
           </h2>
           <p className="lede reveal" data-reveal style={{ '--reveal-delay': '160ms' } as CSSProperties}>
-            A sealed piece of silver, hovering in the dark. It is not locked —
-            only closed.
+            Qorong’uda muallak turgan muhrlangan kumush bo’lagi. U qulflangan
+            emas — shunchaki yopilgan.
           </p>
         </header>
 
@@ -95,7 +95,7 @@ export default function GiftObject({ reducedMotion, finePointer }: GiftObjectPro
             onClick={toggle}
             aria-expanded={open}
             aria-controls="relic-message"
-            aria-label="The silver relic"
+            aria-label="Kumush medalyon"
           >
             <span className="relic-scene">
               <span className="relic-float">
@@ -103,12 +103,12 @@ export default function GiftObject({ reducedMotion, finePointer }: GiftObjectPro
                   <span className="relic__glow" aria-hidden="true" />
 
                   {/* Hidden message — emerges from inside the shell */}
-                  <span className="relic__inner" id="relic-message" role="group" aria-label="Message inside the relic">
+                  <span className="relic__inner" id="relic-message" role="group" aria-label="Obyekt ichidagi xabar">
                     <span className="relic__inner-glass">
-                      <span className="relic__message-title metal-ink">You made it here. ✨</span>
+                      <span className="relic__message-title metal-ink">Bu yergacha yetib kelding. ✨</span>
                       <span className="relic__message-text">
-                        Sometimes, a small surprise is enough to make an ordinary
-                        day a little more interesting.
+                        Ba’zan oddiy kunni biroz qiziqarli qilish uchun kichik
+                        syurprizning o’zi yetarli.
                       </span>
                     </span>
                   </span>
@@ -136,7 +136,7 @@ export default function GiftObject({ reducedMotion, finePointer }: GiftObjectPro
 
             <span className="relic-hint" aria-hidden="true">
               <span className="relic-hint__text">
-                {open ? 'Click or tap to close' : 'Click, tap, or press Enter to open'}
+                {open ? 'Yopish uchun bosing' : 'Ochish uchun bosing'}
               </span>
               <span className="relic-hint__pulse" />
             </span>

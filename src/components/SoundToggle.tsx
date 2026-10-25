@@ -20,8 +20,8 @@ export default function SoundToggle() {
       className={`sound-toggle ${playing ? 'sound-toggle--on' : ''}`}
       onClick={toggle}
       aria-pressed={playing}
-      aria-label={playing ? 'Pause ambient sound' : 'Play ambient sound'}
-      title={playing ? 'Pause ambient sound' : 'Play ambient sound'}
+      aria-label={playing ? 'Ambient ovozni o’chirish' : 'Ambient ovozni yoqish'}
+      title={playing ? 'Ambient ovozni o’chirish' : 'Ambient ovozni yoqish'}
     >
       <span className="sound-toggle__glass" aria-hidden="true">
         <span className="sound-toggle__icon">
@@ -32,7 +32,7 @@ export default function SoundToggle() {
         </span>
       </span>
       <span className="sound-toggle__label label">
-        {playing ? 'Sound on' : 'Sound off'}
+        {playing ? 'Ovoz yoqilgan' : 'Ovoz o’chirilgan'}
       </span>
     </button>
   )

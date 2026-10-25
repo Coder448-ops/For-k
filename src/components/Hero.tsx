@@ -62,11 +62,11 @@ export default function Hero({ reducedMotion, finePointer }: HeroProps) {
         <div className="hero__copy">
           <h1 className="hero__title" id="hero-title">
             <span className="hero__line hero__line--for">
-              <span className="hero__line-inner">For</span>
+              <span className="hero__line-inner">Faqat</span>
             </span>
             <span className="hero__line hero__line--name">
               <span className="hero__line-inner">
-                <span className="hero__name metal-ink">Kumush</span>
+                <span className="hero__name metal-ink">Kumushga</span>
                 <span className="hero__dot metal-ink">.</span>
               </span>
             </span>
@@ -74,12 +74,12 @@ export default function Hero({ reducedMotion, finePointer }: HeroProps) {
 
           <span className="hero__rule" aria-hidden="true" />
 
-          <p className="hero__subtitle">A little surprise, created just for you.</p>
+          <p className="hero__subtitle">Sen uchun yaratilgan kichik syurpriz.</p>
         </div>
       </div>
 
-      <a className="hero__scroll" href="#object" aria-label="Explore — jump to the next section">
-        <span className="hero__scroll-label label">Explore</span>
+      <a className="hero__scroll" href="#object" aria-label="Pastga — keyingi bo’limga o’tish">
+        <span className="hero__scroll-label label">Pastga</span>
         <span className="hero__scroll-line" aria-hidden="true" />
       </a>
     </section>

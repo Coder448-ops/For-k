@@ -1,12 +1,12 @@
 /**
- * Runtime smoke test for KUMUSH — A Silver Experience.
+ * Runtime smoke test for KUMUSH — A Silver Experience (uzbek UI).
  *
  * Boots the real App in jsdom (via vite-node so TSX/CSS imports work),
- * then drives the full journey: intro → Discover → relic open/close →
- * gallery cards → replay → re-enter. Fails on uncaught errors, React
+ * then drives the full journey: intro → Kashf etish → relic open/close →
+ * gallery cards → replay → skip. Fails on uncaught errors, React
  * console errors, or missing/broken interactions.
  *
- * Run: npx vite-node scripts/smoke.mjs
+ * Run: npm run test:smoke
  */
 import { JSDOM } from 'jsdom'
 
@@ -72,7 +72,6 @@ function hookConsole() {
     origError(...args)
   }
   console.warn = (...args) => {
-    // React act warnings are real problems; ignore nothing else quietly
     errors.push('WARN: ' + args.map(String).join(' '))
     origWarn(...args)
   }
@@ -115,19 +114,20 @@ async function runPass(reducedMotion) {
   const q = (sel) => doc.querySelector(sel)
   const qa = (sel) => [...doc.querySelectorAll(sel)]
 
-  // ---- 1. Introduction ----
+  // ---- 1. Kirish (Introduction) ----
   assert(!!q('.intro'), 'intro overlay is mounted')
-  assert(text().includes('Not everything'), 'intro tagline line 1 present')
-  assert(text().includes('needs an explanation.'), 'intro tagline line 2 present')
+  assert(text().includes('Hamma narsani ham'), 'intro tagline line 1 present')
+  assert(text().includes('tushuntirish shart emas.'), 'intro tagline line 2 present')
   assert(!!q('.intro__discover'), 'Discover button present')
-  assert(q('.intro__discover')?.textContent?.includes('Discover'), 'Discover label correct')
+  assert(q('.intro__discover')?.textContent?.includes('Kashf etish'), 'Discover label correct (uz)')
   assert(!!q('.intro__skip'), 'Skip intro control present')
+  assert(q('.intro__skip')?.textContent?.includes('O’tkazib yuborish'), 'Skip label correct (uz)')
   assert(!!q('.intro__k'), 'metallic K monogram present')
   assert(q('body').classList.contains('is-locked'), 'scroll locked during intro')
   assert(q('.experience')?.hasAttribute('inert'), 'main experience inert during intro')
   assert(!q('audio'), 'no audio element ever autoplays')
 
-  // ---- 2. Enter via Discover ----
+  // ---- 2. Enter via Kashf etish ----
   await act(async () => {
     q('.intro__discover').click()
     await sleep(reducedMotion ? 200 : 1200)
@@ -137,9 +137,11 @@ async function runPass(reducedMotion) {
   assert(!q('body').classList.contains('is-locked'), 'scroll unlocked in main')
   assert(q('.experience')?.classList.contains('experience--entered'), 'entrance state applied')
   assert(!q('.experience')?.hasAttribute('inert'), 'experience no longer inert')
-  assert(q('.hero__name')?.textContent === 'Kumush', 'hero name is exactly "Kumush"')
-  assert(text().includes('A little surprise, created just for you.'), 'hero subtitle exact')
-  assert(q('.hero__scroll')?.getAttribute('href') === '#object', 'Explore cue targets next section')
+  assert(q('.hero__name')?.textContent === 'Kumushga', 'hero name is exactly "Kumushga"')
+  assert(text().includes('Faqat'), 'hero dedication lead-in present')
+  assert(text().includes('Sen uchun yaratilgan kichik syurpriz.'), 'hero subtitle exact (uz)')
+  assert(q('.hero__scroll')?.getAttribute('href') === '#object', 'scroll cue targets next section')
+  assert(q('.hero__scroll')?.textContent?.includes('Pastga'), 'scroll cue label (uz)')
   assert(!!q('#object') && !!q('#gallery') && !!q('#closing'), 'all section anchors exist')
   assert(!!q('.ring'), 'silver ring rendered')
   assert(!!q('.monogram-btn') && !!q('.scroll-progress'), 'chrome controls rendered')
@@ -150,12 +152,15 @@ async function runPass(reducedMotion) {
   const relic = q('.relic-trigger')
   assert(!!relic, 'relic trigger rendered')
   assert(relic?.getAttribute('aria-expanded') === 'false', 'relic starts closed')
-  assert(q('#relic-message')?.textContent?.includes('You made it here. ✨'), 'hidden message exact (✨ included)')
+  assert(
+    q('#relic-message')?.textContent?.includes('Bu yergacha yetib kelding. ✨'),
+    'hidden message exact (✨ included)',
+  )
   assert(
     q('#relic-message')?.textContent?.includes(
-      'Sometimes, a small surprise is enough to make an ordinary day a little more interesting.',
+      'Ba’zan oddiy kunni biroz qiziqarli qilish uchun kichik syurprizning o’zi yetarli.',
     ),
-    'hidden sub-message exact',
+    'hidden sub-message exact (uz)',
   )
   await act(async () => {
     relic.click()
@@ -173,13 +178,13 @@ async function runPass(reducedMotion) {
   // ---- 4. Gallery ----
   const titles = qa('.gcard__title').map((el) => el.textContent)
   assert(
-    JSON.stringify(titles) === JSON.stringify(['Perspective', 'Possibility', 'A Little Wonder']),
-    'gallery card titles exact',
+    JSON.stringify(titles) === JSON.stringify(['Nuqtayi nazar', 'Imkoniyat', 'Kichik mo’jiza']),
+    'gallery card titles exact (uz)',
   )
   const expected = [
-    'Sometimes, a different view changes everything.',
-    'There is always something new to discover.',
-    'Small details can make an experience memorable.',
+    'Ba’zan boshqacha nuqtayi nazar hammasini o’zgartiradi.',
+    'Har doim kashf etadigan yangi narsa bor.',
+    'Kichik tafsilotlar tajribani unutilmas qilishi mumkin.',
   ]
   const buttons = qa('.gcard__btn')
   assert(buttons.length === 3, 'three gallery buttons')
@@ -194,7 +199,7 @@ async function runPass(reducedMotion) {
     assert(before === 'false' && after === 'true', `card ${i + 1} expands on activation`)
     assert(
       card.querySelector('.gcard__panel-text')?.textContent === expected[i],
-      `card ${i + 1} message exact`,
+      `card ${i + 1} message exact (uz)`,
     )
     assert(
       card.querySelector('.gcard__panel')?.getAttribute('aria-labelledby') &&
@@ -210,18 +215,22 @@ async function runPass(reducedMotion) {
   assert(qa('.gcard__btn')[1].getAttribute('aria-expanded') === 'false', 'card 2 collapses again')
 
   // ---- 5. Closing + real controls ----
-  assert(text().includes('Some surprises are better'), 'closing line 1 present')
-  assert(text().includes('Hope this little experience made you smile.'), 'closing line 2 exact')
+  assert(text().includes('Ba’zi syurprizlarni izohlashdan ko’ra'), 'closing line 1 present (uz)')
+  assert(text().includes('kashf etish'), 'closing emphasis present')
+  assert(
+    text().includes('Umid qilamanki, bu kichik tajriba yuzingga tabassum olib keldi.'),
+    'closing line 2 exact (uz)',
+  )
   assert(!!q('.closing__emblem-k'), 'closing K emblem present')
-  const replayBtn = qa('.ghost-btn').find((b) => b.textContent.includes('Replay'))
-  const topBtn = qa('.ghost-btn').find((b) => b.textContent.includes('Back to top'))
-  assert(!!replayBtn && !!topBtn, 'footer controls rendered')
+  const replayBtn = qa('.ghost-btn').find((b) => b.textContent.includes('qayta'))
+  const topBtn = qa('.ghost-btn').find((b) => b.textContent.includes('Yuqoriga'))
+  assert(!!replayBtn && !!topBtn, 'footer controls rendered (uz labels)')
 
   await act(async () => {
     replayBtn.click()
     await sleep(reducedMotion ? 150 : 300)
   })
-  assert(!!q('.intro'), 'Replay the opening returns to the intro')
+  assert(!!q('.intro'), 'Replay returns to the intro')
   assert(q('body').classList.contains('is-locked'), 'scroll re-locked during replayed intro')
 
   // re-enter through Skip this time
