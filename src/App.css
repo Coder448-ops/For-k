@@ -1,0 +1,36 @@
+/* ============================================================
+   App frame
+   ============================================================ */
+
+.app {
+  position: relative;
+  min-height: 100dvh;
+  background:
+    radial-gradient(
+      120% 80% at 50% -10%,
+      rgba(23, 26, 31, 0.55) 0%,
+      transparent 55%
+    ),
+    linear-gradient(180deg, #070809 0%, #08090b 45%, #070809 100%);
+}
+
+/* The experience sits above the particle canvas, below the chrome */
+.experience {
+  position: relative;
+  z-index: 1;
+}
+
+/* While the intro overlay is up, the page behind it stays out of reach */
+.experience[aria-hidden='true'] {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Keep fixed chrome above the vignette/grain but below the intro */
+.vignette {
+  z-index: 80;
+}
+
+.grain {
+  z-index: 81;
+}

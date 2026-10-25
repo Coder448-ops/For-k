@@ -1,0 +1,81 @@
+/* ============================================================
+   Fixed K monogram (back to top)
+   ============================================================ */
+
+.monogram-btn {
+  position: fixed;
+  top: clamp(0.9rem, 2.5vw, 1.6rem);
+  left: clamp(0.9rem, 2.5vw, 1.6rem);
+  z-index: var(--chrome-z);
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background:
+    radial-gradient(
+      circle at 34% 28%,
+      rgba(38, 42, 49, 0.9),
+      rgba(10, 12, 15, 0.92)
+    )
+    padding-box,
+    linear-gradient(
+      135deg,
+      rgba(245, 246, 247, 0.5),
+      rgba(133, 139, 149, 0.14) 46%,
+      rgba(217, 221, 227, 0.42)
+    )
+    border-box;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 12px 30px -10px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(245, 246, 247, 0.12);
+  transition:
+    transform var(--dur-med) var(--ease-cinema),
+    box-shadow var(--dur-med) var(--ease-soft);
+  animation: chrome-in 900ms var(--ease-cinema) 1250ms both;
+}
+
+.monogram-btn__ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1px solid rgba(217, 221, 227, 0.16);
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease-soft);
+}
+
+.monogram-btn__k {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 620;
+  font-size: 1.35rem;
+  line-height: 1;
+  translate: 0 -0.5px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .monogram-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 18px 40px -12px rgba(0, 0, 0, 0.85),
+      0 0 30px -6px rgba(217, 221, 227, 0.3);
+  }
+
+  .monogram-btn:hover .monogram-btn__ring {
+    opacity: 1;
+  }
+}
+
+.monogram-btn:active {
+  transform: scale(0.95);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .monogram-btn {
+    animation: none;
+    opacity: 1;
+  }
+}
