@@ -1,0 +1,204 @@
+/* ============================================================
+   Rotating silver ring
+   ============================================================ */
+
+.ring {
+  --ring-size: clamp(17rem, 62vmin, 34rem);
+  position: relative;
+  width: var(--ring-size);
+  height: var(--ring-size);
+  perspective: 900px;
+  transform-style: preserve-3d;
+}
+
+/* ---------- orbits ---------- */
+
+.ring__orbit {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+}
+
+.ring__orbit--a,
+.ring__orbit--b,
+.ring__orbit--c {
+  background: conic-gradient(
+    from 0deg,
+    rgba(245, 246, 247, 0.02) 0%,
+    rgba(217, 221, 227, 0.6) 10%,
+    rgba(245, 246, 247, 0.95) 16%,
+    rgba(133, 139, 149, 0.14) 27%,
+    rgba(217, 221, 227, 0.45) 50%,
+    rgba(7, 8, 9, 0) 58%,
+    rgba(174, 181, 191, 0.5) 78%,
+    rgba(245, 246, 247, 0.9) 87%,
+    rgba(245, 246, 247, 0.02) 100%
+  );
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 2.4px),
+    #fff calc(100% - 1.6px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 2.4px),
+    #fff calc(100% - 1.6px)
+  );
+}
+
+.ring__orbit--a {
+  animation: ring-spin-a 34s linear infinite;
+}
+
+.ring__orbit--b {
+  inset: 9%;
+  opacity: 0.65;
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 1.6px),
+    #fff calc(100% - 1.1px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 1.6px),
+    #fff calc(100% - 1.1px)
+  );
+  animation: ring-spin-b 46s linear infinite;
+}
+
+.ring__orbit--c {
+  inset: -7%;
+  opacity: 0.4;
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 1.2px),
+    #fff calc(100% - 0.9px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 1.2px),
+    #fff calc(100% - 0.9px)
+  );
+  animation: ring-spin-c 60s linear infinite;
+}
+
+@keyframes ring-spin-a {
+  from {
+    transform: rotateX(72deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(72deg) rotateZ(360deg);
+  }
+}
+
+@keyframes ring-spin-b {
+  from {
+    transform: rotateX(58deg) rotateY(14deg) rotateZ(360deg);
+  }
+  to {
+    transform: rotateX(58deg) rotateY(14deg) rotateZ(0deg);
+  }
+}
+
+@keyframes ring-spin-c {
+  from {
+    transform: rotateX(84deg) rotateY(-10deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(84deg) rotateY(-10deg) rotateZ(360deg);
+  }
+}
+
+/* A single point of light riding orbit A (own layer — masks clip children) */
+.ring__flare-orbit {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+  animation: ring-spin-a 34s linear infinite;
+}
+
+.ring__flare {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px;
+  border-radius: 50%;
+  background: #f5f6f7;
+  box-shadow:
+    0 0 12px 3px rgba(245, 246, 247, 0.55),
+    0 0 40px 10px rgba(217, 221, 227, 0.22);
+  transform: translateY(calc(var(--ring-size) / -2 + 1px));
+}
+
+/* ---------- core ---------- */
+
+.ring__core {
+  position: absolute;
+  inset: 31%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 38% 32%,
+    rgba(245, 246, 247, 0.16) 0%,
+    rgba(174, 181, 191, 0.09) 34%,
+    rgba(17, 19, 22, 0.25) 62%,
+    transparent 78%
+  );
+  border: 1px solid rgba(217, 221, 227, 0.12);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  box-shadow:
+    inset 0 0 34px rgba(217, 221, 227, 0.09),
+    0 0 60px rgba(174, 181, 191, 0.08);
+  animation: core-breathe 7.5s var(--ease-soft) infinite alternate;
+}
+
+@keyframes core-breathe {
+  from {
+    opacity: 0.75;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+}
+
+.ring__glow {
+  position: absolute;
+  inset: 16%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(174, 181, 191, 0.14) 0%,
+    rgba(174, 181, 191, 0.05) 44%,
+    transparent 70%
+  );
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .ring__orbit--a,
+  .ring__flare-orbit {
+    transform: rotateX(72deg) rotateZ(24deg);
+    animation: none;
+  }
+  .ring__orbit--b {
+    transform: rotateX(58deg) rotateY(14deg) rotateZ(200deg);
+    animation: none;
+  }
+  .ring__orbit--c {
+    transform: rotateX(84deg) rotateY(-10deg) rotateZ(120deg);
+    animation: none;
+  }
+  .ring__core {
+    animation: none;
+    opacity: 1;
+  }
+}

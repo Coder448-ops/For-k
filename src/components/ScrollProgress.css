@@ -1,0 +1,23 @@
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: calc(var(--chrome-z) + 1);
+  pointer-events: none;
+  background: rgba(217, 221, 227, 0.05);
+}
+
+.scroll-progress__bar {
+  height: 100%;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  background: linear-gradient(
+    90deg,
+    rgba(174, 181, 191, 0.35),
+    rgba(245, 246, 247, 0.95)
+  );
+  box-shadow: 0 0 12px rgba(217, 221, 227, 0.5);
+  will-change: transform;
+}

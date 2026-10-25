@@ -1,0 +1,255 @@
+/* ============================================================
+   03 — Finale
+   ============================================================ */
+
+.closing {
+  position: relative;
+  overflow: clip;
+  padding-block: var(--space-xl) clamp(2.5rem, 7vh, 4.5rem);
+  background:
+    radial-gradient(
+      90% 60% at 50% 108%,
+      rgba(17, 19, 22, 0.9) 0%,
+      transparent 60%
+    ),
+    linear-gradient(180deg, transparent 0%, rgba(5, 6, 8, 0.55) 62%, #040506 100%);
+}
+
+/* ---------- fading motes ---------- */
+
+.closing__motes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.closing__mote {
+  position: absolute;
+  bottom: -4%;
+  border-radius: 50%;
+  background: #e7eaee;
+  box-shadow: 0 0 8px rgba(217, 221, 227, 0.65);
+  opacity: 0;
+  animation: mote-rise 14s var(--ease-soft) infinite;
+}
+
+@keyframes mote-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0);
+  }
+  12% {
+    opacity: 0.7;
+  }
+  55% {
+    opacity: 0.32;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-88vh) translateX(var(--drift, 10px));
+  }
+}
+
+/* Deep fade at the very bottom — the experience dims to black */
+.closing__fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 34%;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(3, 4, 5, 0.85));
+}
+
+/* ---------- layout ---------- */
+
+.closing__layout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-m);
+}
+
+.closing__title {
+  font-size: var(--text-h2);
+  font-weight: 520;
+  color: var(--soft-white);
+  max-width: 24ch;
+}
+
+.closing__title em {
+  font-style: italic;
+  background-image: var(--metal-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.closing__smile {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-lede);
+  font-weight: 480;
+  color: var(--platinum);
+}
+
+/* ---------- emblem ---------- */
+
+.closing__emblem {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(5.4rem, 14vmin, 7rem);
+  height: clamp(5.4rem, 14vmin, 7rem);
+  margin-top: clamp(0.6rem, 2vh, 1.4rem);
+  animation: emblem-afterglow 11s var(--ease-soft) 2s infinite;
+}
+
+@keyframes emblem-afterglow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  58% {
+    opacity: 0.52;
+  }
+}
+
+/* soft halo — lives on the un-masked emblem itself (masks clip children) */
+.closing__emblem::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(174, 181, 191, 0.16) 0%,
+    transparent 62%
+  );
+  filter: blur(10px);
+}
+
+.closing__emblem-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 140deg,
+    rgba(245, 246, 247, 0.85),
+    rgba(120, 127, 138, 0.25) 22%,
+    rgba(217, 221, 227, 0.75) 48%,
+    rgba(60, 65, 73, 0.4) 70%,
+    rgba(245, 246, 247, 0.85)
+  );
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 1.6px),
+    #fff calc(100% - 1.2px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 1.6px),
+    #fff calc(100% - 1.2px)
+  );
+}
+
+.closing__emblem-k {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2.6rem, 7vmin, 3.4rem);
+  line-height: 1;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.6));
+}
+
+.closing__rule {
+  max-width: 22rem;
+  margin-top: clamp(0.4rem, 1.5vh, 1rem);
+}
+
+/* ---------- controls ---------- */
+
+.closing__controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 0.4rem;
+}
+
+.ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0.65rem 1.3rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  background:
+    linear-gradient(
+      160deg,
+      rgba(217, 221, 227, 0.07),
+      rgba(217, 221, 227, 0.02)
+    )
+    padding-box,
+    linear-gradient(
+      135deg,
+      rgba(217, 221, 227, 0.32),
+      rgba(133, 139, 149, 0.1) 50%,
+      rgba(217, 221, 227, 0.28)
+    )
+    border-box;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--platinum);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition:
+    color var(--dur-fast) var(--ease-soft),
+    box-shadow var(--dur-med) var(--ease-soft),
+    transform var(--dur-fast) var(--ease-soft);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ghost-btn:hover {
+    color: var(--soft-white);
+    box-shadow: 0 0 28px -6px rgba(217, 221, 227, 0.22);
+    transform: translateY(-1px);
+  }
+}
+
+.ghost-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ---------- note ---------- */
+
+.closing__note {
+  margin-top: clamp(1.4rem, 4vh, 2.4rem);
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(133, 139, 149, 0.75);
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .closing__mote {
+    animation: none !important;
+    opacity: 0.3;
+    bottom: 20%;
+  }
+
+  .closing__emblem {
+    animation: none !important;
+    opacity: 1;
+  }
+}
